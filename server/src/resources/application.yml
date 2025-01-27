@@ -1,9 +1,9 @@
 spring:
   application:
     name: pzen-cms
-  profiles:
+#  profiles:
     #    active: prod #生产环境 运行全部任务
-    active: dev #开发环境  不进行定时任务操作
+#    active: dev #开发环境  不进行定时任务操作
 
 server:
   port: 8080
@@ -35,5 +35,5 @@ logging:
     root: info
     org.springframework.web: debug
     com.pzen: debug
-
+    io.ebean: debug
 

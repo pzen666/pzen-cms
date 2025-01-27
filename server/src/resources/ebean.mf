@@ -1,0 +1,4 @@
+entity-packages: com.pzen.entity
+transactional-packages: com.pzen.server.service.impl
+
+
