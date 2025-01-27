@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: pzen-cms
+  profiles:
+    #    active: prod #生产环境 运行全部任务
+    active: dev #开发环境  不进行定时任务操作
+
+server:
+  port: 8080
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  undertow:
+    access log:
+      dir: logs/undertow/ # Undertow 日志存放目录
+      enabled: false # 是否启动日志
+      pattern: common # 日志格式
+      prefix: access_log
+      suffix: log
+    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
+    max-http-post-size: -1
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 8
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 256
+
+logging:
+  level:
+    root: info
+    org.springframework.web: debug
+    com.pzen: debug
+
+
