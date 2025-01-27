@@ -1,5 +1,6 @@
 package com.pzen.server.controller;
 
+import com.pzen.Result;
 import com.pzen.entity.Video;
 import io.ebean.DB;
 import io.ebean.Database;
@@ -12,13 +13,13 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 public class HelloController {
-    private final Database db = DB.getDefault();
 
+    private final Database db = DB.getDefault();
 
     @GetMapping("/find")
     public Object sayHello() {
-        List<Video> list =  DB.getDefault().find(Video.class).findList();
-        return  list ;
+        List<Video> list = db.find(Video.class).findList();
+        return Result.success(list, null);
     }
 
 }
