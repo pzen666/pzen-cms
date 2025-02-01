@@ -1,8 +1,17 @@
 spring:
   application:
     name: pzen-cms
-#  profiles:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss.SSS
+    time-zone: GMT+8  # 根据需要设置时区
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss.SSS
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+    #  profiles:
     #    active: prod #生产环境 运行全部任务
+
 #    active: dev #开发环境  不进行定时任务操作
 
 server:
