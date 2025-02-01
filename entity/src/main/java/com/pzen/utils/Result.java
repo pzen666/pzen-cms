@@ -1,4 +1,4 @@
-package com.pzen;
+package com.pzen.utils;
 
 public class Result<T> {
 
