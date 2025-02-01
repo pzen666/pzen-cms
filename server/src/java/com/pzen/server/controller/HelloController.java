@@ -1,7 +1,7 @@
 package com.pzen.server.controller;
 
-import com.pzen.Result;
 import com.pzen.entity.Video;
+import com.pzen.utils.Result;
 import io.ebean.DB;
 import io.ebean.Database;
 import org.springframework.web.bind.annotation.CrossOrigin;

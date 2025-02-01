@@ -10,11 +10,12 @@ import java.util.Optional;
 public class VideoServiceImpl extends EbeanRepositoryImpl<Video, String>
         implements VideoService {
 
+    private final Class<Video> entityType;
 
-    public VideoServiceImpl(Class<VideoService> entityType) {
+    public VideoServiceImpl(Class<Video> entityType){
         super(Video.class);
+        this.entityType = entityType;
     }
-
     @Override
     public List<Video> findByVideoBatchId(String batchId) {
         return DB.find(Video.class)

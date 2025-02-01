@@ -15,7 +15,7 @@ public class EbeanRepositoryImpl<T, ID> implements EbeanRepository<T, ID> {
 
     private final Class<T> entityType;
 
-    public EbeanRepositoryImpl(Class<T> entityType){
+    public EbeanRepositoryImpl(Class<T> entityType) {
         this.entityType = entityType;
     }
 
