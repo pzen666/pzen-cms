@@ -14,11 +14,9 @@ import java.util.List;
 @CrossOrigin("*")
 public class HelloController {
 
-    private final Database db = DB.getDefault();
-
     @GetMapping("/find")
     public Object sayHello() {
-        List<Video> list = db.find(Video.class).findList();
+        List<Video> list = DB.byName("db").find(Video.class).findList();
         return Result.success(list, null);
     }
 

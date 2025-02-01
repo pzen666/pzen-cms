@@ -2,6 +2,7 @@ package com.pzen.server.service.impl;
 
 import com.pzen.dto.TestDTO;
 import com.pzen.entity.Test;
+import com.pzen.entity.Test2;
 import com.pzen.server.service.TestService;
 import com.pzen.server.utils.EntityHelper;
 import com.pzen.server.utils.QueryConditionBuilder;
@@ -72,7 +73,18 @@ public class TestServiceImpl implements TestService {
     public Test add(TestDTO dto) {
         Test test = new Test();
         EntityHelper.convertDtoToEntity(dto, test);
-        test.save();
+//        test.save();
+        DB.byName("db").save(test);
+        return test;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Test2 add2(TestDTO dto) {
+        Test2 test = new Test2();
+        EntityHelper.convertDtoToEntity(dto, test);
+//        test.save();
+        DB.byName("db2").save(test);
         return test;
     }
 

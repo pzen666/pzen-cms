@@ -2,6 +2,7 @@ package com.pzen.server.controller;
 
 import com.pzen.dto.TestDTO;
 import com.pzen.entity.Test;
+import com.pzen.entity.Test2;
 import com.pzen.server.service.TestService;
 import com.pzen.server.utils.QueryConditionBuilder;
 import com.pzen.utils.Result;
@@ -71,6 +72,12 @@ public class TestController {
     @RequestMapping("/save")
     public Result<Object> save(@RequestBody TestDTO dto) {
         Test test = testService.add(dto);
+        return Result.success(test, null);
+    }
+
+    @RequestMapping("/saveDB2")
+    public Result<Object> save2(@RequestBody TestDTO dto) {
+        Test2 test = testService.add2(dto);
         return Result.success(test, null);
     }
 
