@@ -1,5 +1,6 @@
 package com.pzen.server.config.filter;
 
+import com.pzen.entity.User;
 import com.pzen.server.config.SkyConfigInfo;
 import com.pzen.server.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
@@ -9,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -47,7 +47,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // 处理 JWT 认证逻辑
         String token = jwtUtil.resolveToken(request);
         if (token != null) {
-            UserDetails userDetails = jwtUtil.getUserDetailsFromToken(token);
+            User userDetails = jwtUtil.getUserDetailsFromToken(token);
             if (jwtUtil.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
