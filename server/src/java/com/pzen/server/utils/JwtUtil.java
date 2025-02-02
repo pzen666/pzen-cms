@@ -11,6 +11,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,22 +76,40 @@ public class JwtUtil {
     // 生成 JWT 令牌
     public String generateToken(User u) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, u.getUserName());
+//        return createToken(claims, u.getUserName());
+        try {
+            PrivateKey privateKey = loadPrivateKey( System.getProperty("user.dir") + "/path/key/private.key");
+            return createToken(claims, u.getUserName(), privateKey);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String generateRefreshToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+//        return createToken(claims, u.getUserName());
+        try {
+            PrivateKey privateKey = loadPrivateKey( System.getProperty("user.dir") + "/path/key/private.key");
+            return createToken(claims, username, privateKey);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // 使用声明生成 JWT 令牌
     private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+        return Jwts.builder().claims(claims).subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+    }
+
+    private String createToken(Map<String, Object> claims, String subject, PrivateKey privateKey) {
+        return Jwts.builder().claims(claims).subject(subject)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.ES256, privateKey)
                 .compact();
     }
 
@@ -112,5 +135,12 @@ public class JwtUtil {
         }
     }
 
+    public static PrivateKey loadPrivateKey(String filename) throws Exception {
+        byte[] keyBytes = Files.readAllBytes(Paths.get(filename));
+        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+//        KeyFactory kf = KeyFactory.getInstance("RSA");
+        KeyFactory kf = KeyFactory.getInstance("EC");
+        return kf.generatePrivate(spec);
+    }
 
 }
