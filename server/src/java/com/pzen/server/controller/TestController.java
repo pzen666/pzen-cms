@@ -13,10 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,7 +38,7 @@ public class TestController {
     //    "name" : {"type": "equals","value": null}
     //  }
     //}
-    @RequestMapping("/find")
+    @GetMapping("/find")
     public Result<Page<Test>> find(@RequestBody TestDTO dto) {
         Query<Test> query = DB.find(Test.class);
         // 使用工具类构建查询条件
@@ -62,7 +59,7 @@ public class TestController {
         return Result.success(list, null);
     }
 
-    @RequestMapping("/findAll")
+    @GetMapping("/findAll")
     public Result<Page<Test>> findAll(@RequestBody TestDTO dto) {
         Page<Test> list = testService.findAllPage(dto);
         return Result.success(list, null);
@@ -72,13 +69,13 @@ public class TestController {
     //  "videoName" : "2",
     //  "name" : "1"
     //}
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public Result<Object> save(@RequestBody TestDTO dto) {
         Test test = testService.add(dto);
         return Result.success(test, null);
     }
 
-    @RequestMapping("/saveDB2")
+    @PostMapping("/saveDB2")
     public Result<Object> save2(@RequestBody TestDTO dto) {
         Test2 test = testService.add2(dto);
         return Result.success(test, null);
@@ -88,13 +85,13 @@ public class TestController {
     //  "videoName" : "222",
     //  "name" : "1"
     //}
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public Result<Object> update(@RequestBody TestDTO dto) {
         Test test = testService.update(dto);
         return Result.success(test, null);
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public Result<Object> delete(@RequestBody TestDTO dto) {
         Test test = testService.del(dto);
         return Result.success(test, null);
@@ -104,13 +101,13 @@ public class TestController {
     //  "videoName" : "222",
     //  "name" : "1"
     //}
-    @RequestMapping("/deleteRollback")
+    @PostMapping("/deleteRollback")
     public Result<Object> deleteRollback(@RequestBody TestDTO dto) {
         Test test = testService.deleteRollback(dto);
         return Result.success(test, null);
     }
 
-    @RequestMapping("/findWhere")
+    @GetMapping("/findWhere")
     public Result<Object> findWhere(@RequestBody TestDTO dto) {
         List<Test> test = DB.byName("db").find(Test.class).where().or(
                 Expr.eq("videoName", "1"),
