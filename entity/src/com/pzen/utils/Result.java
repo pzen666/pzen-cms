@@ -1,5 +1,7 @@
 package com.pzen.utils;
 
+import java.util.Map;
+
 public class Result<T> {
 
     private int code;
@@ -43,6 +45,10 @@ public class Result<T> {
 
     public static <T> Result<T> failure(int code) {
         return new Result<>(code, "fail", null);
+    }
+
+    public static Result<Map<String, String>> error(String msg) {
+        return new Result<>(BAD_REQUEST, msg, null);
     }
 
     public int getCode() {

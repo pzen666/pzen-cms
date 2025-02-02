@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -21,8 +24,11 @@ public class User extends BaseModel {
     private String lastName;
     private String email;
     private String password;
+    private String userName;
 
 
-
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return java.util.List.of();
+    }
 }
 

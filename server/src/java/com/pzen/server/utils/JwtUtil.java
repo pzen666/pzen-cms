@@ -1,12 +1,13 @@
 package com.pzen.server.utils;
 
+import com.pzen.entity.User;
+import io.ebean.DB;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +21,14 @@ public class JwtUtil {
 
     @Value("${jwt.secret.secretKey}")
     private String secret;
-
     @Value("${jwt.secret.expirationTime}")
     private long expirationTime;
-    // 注入 UserDetailsService
+    @Value("${jwt.secret.expirationRefreshTime}")
+    private long expirationRefreshTime;
+
     @Autowired
     private UserDetailsService userDetailsService;
+
     // 从请求中提取 JWT 令牌
     public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
@@ -66,9 +69,14 @@ public class JwtUtil {
     }
 
     // 生成 JWT 令牌
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(User u) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, u.getUserName());
+    }
+
+    public String generateRefreshToken(String username) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
     }
 
     // 使用声明生成 JWT 令牌
@@ -83,16 +91,25 @@ public class JwtUtil {
     }
 
     // 验证 JWT 令牌
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean validateToken(String token, User userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUserName()) && !isTokenExpired(token));
     }
 
     // 从 JWT 令牌中提取用户详细信息
-    public UserDetails getUserDetailsFromToken(String token) {
+    public User getUserDetailsFromToken(String token) {
         final String username = extractUsername(token);
         // 这里假设你有一个 UserDetailsService 来加载用户详细信息
-        return userDetailsService.loadUserByUsername(username);
+        return DB.byName("db").find(User.class).where().eq("userName", username).findOne();
+    }
+
+    public String refreshToken(String refreshToken) {
+        if (!isTokenExpired(refreshToken)) {
+            String username = extractUsername(refreshToken);
+            return generateRefreshToken(username);
+        } else {
+            throw new RuntimeException("Refresh token expired");
+        }
     }
 
 
