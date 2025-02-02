@@ -7,6 +7,7 @@ import com.pzen.server.service.TestService;
 import com.pzen.server.utils.QueryConditionBuilder;
 import com.pzen.utils.Result;
 import io.ebean.DB;
+import io.ebean.Expr;
 import io.ebean.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -104,6 +107,15 @@ public class TestController {
     @RequestMapping("/deleteRollback")
     public Result<Object> deleteRollback(@RequestBody TestDTO dto) {
         Test test = testService.deleteRollback(dto);
+        return Result.success(test, null);
+    }
+
+    @RequestMapping("/findWhere")
+    public Result<Object> findWhere(@RequestBody TestDTO dto) {
+        List<Test> test = DB.byName("db").find(Test.class).where().or(
+                Expr.eq("videoName", "1"),
+                Expr.eq("name", "")
+        ).findList();
         return Result.success(test, null);
     }
 

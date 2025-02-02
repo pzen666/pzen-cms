@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 //@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
-public class PzenCmsApplication {
+public class PZenCmsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PzenCmsApplication.class, args);
+        SpringApplication.run(PZenCmsApplication.class, args);
     }
 
 }
