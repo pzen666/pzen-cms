@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Map;
 
 @Data
-public class TestDTO {
+public class UserDTO {
 
 
     private Integer page;
@@ -16,17 +16,16 @@ public class TestDTO {
     private String sortOrder;//排序方式
     private Map<String, Condition> conditions; // 使用 Map 来存储多个查询条件
     public String getSortName() {
-        return (sortName == null || sortName.isEmpty()) ? "videoId" : sortName;
+        return (sortName == null || sortName.isEmpty()) ? "id" : sortName;
     }
 
     public String getSortOrder() {
         return (sortOrder == null || sortOrder.isEmpty()) ? "ASC" : sortOrder;
     }
 
-
-
-
-    private Long videoId;
-    private String videoName;
-    private String name;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
 }
