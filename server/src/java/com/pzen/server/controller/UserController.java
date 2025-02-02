@@ -4,10 +4,9 @@ import com.pzen.dto.UserDTO;
 import com.pzen.entity.User;
 import com.pzen.server.service.UserService;
 import com.pzen.utils.Result;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 @RestController
 @CrossOrigin("*")
@@ -15,31 +14,44 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final WebApplicationContext webApplicationContext;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, WebApplicationContext webApplicationContext) {
         this.userService = userService;
+        this.webApplicationContext = webApplicationContext;
     }
 
-    @RequestMapping("/save")
+    @PostMapping("/save")
+    @PreAuthorize("hasRole('USER')")
     public Result<Object> save(@RequestBody UserDTO dto) {
         User u = userService.add(dto);
         return Result.success(u, null);
     }
 
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public Result<Object> delete(@RequestBody UserDTO dto) {
         User u = userService.del(dto);
         return Result.success(u, null);
     }
-    @RequestMapping("/update")
+
+    @PostMapping("/update")
+    @PreAuthorize("hasRole('USER')")
     public Result<Object> update(@RequestBody UserDTO dto) {
         User u = userService.update(dto);
         return Result.success(u, null);
     }
-    @RequestMapping("/findOne")
+
+    @PostMapping("/findOne")
+    @PreAuthorize("hasRole('USER')")
     public Result<User> findOne(@RequestBody UserDTO dto) {
         User u = userService.findOne(dto);
         return Result.success(u, null);
+    }
+
+    @GetMapping("/get")
+    public Result<Object> get() {
+        return Result.success("123456789", null);
     }
 
 }
