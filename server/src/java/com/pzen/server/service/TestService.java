@@ -2,6 +2,7 @@ package com.pzen.server.service;
 
 import com.pzen.dto.TestDTO;
 import com.pzen.entity.Test;
+import com.pzen.entity.Test2;
 import io.ebean.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,8 @@ public interface TestService {
 
 
     Test add(TestDTO dto);
+
+    Test2 add2(TestDTO dto);
 
     Test update(TestDTO dto);
 

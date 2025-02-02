@@ -12,6 +12,7 @@
     <properties>
         <java.version>21</java.version>
         <ebean.version>15.8.1</ebean.version>
+        <log4j.version>2.24.3</log4j.version>
     </properties>
 
     <dependencies>
@@ -24,6 +25,16 @@
             <groupId>com.pzen</groupId>
             <artifactId>entity</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,6 +82,13 @@
             <artifactId>ebean-platform-postgres</artifactId>
             <version>${ebean.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.ebean/ebean-ddl-generator -->
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-ddl-generator</artifactId>
+            <version>${ebean.version}</version>
+            <scope>compile</scope>
+        </dependency>
 
 
         <dependency>
@@ -114,6 +132,23 @@
             <artifactId>spring-data-ebean</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
 
 
     </dependencies>
@@ -133,7 +168,8 @@
                         <id>main</id>
                         <phase>process-classes</phase>
                         <configuration>
-                            <transformArgs>debug=1</transformArgs>
+                            <!-- 调试模式仅在开发环境中启用 -->
+<!--                            <transformArgs>debug=1</transformArgs>-->
                         </configuration>
                         <goals>
                             <goal>enhance</goal>
