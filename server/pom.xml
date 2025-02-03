@@ -69,11 +69,21 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- 添加 Undertow 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 引入 Log4j2 日志 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
@@ -82,21 +92,59 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.5</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.ebean</groupId>
             <artifactId>ebean</artifactId>
             <version>${ebean.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.ebean/ebean-platform-postgres -->
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-agent</artifactId>
+            <version>${ebean.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>querybean-generator</artifactId>
+            <version>${ebean.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Ebean对Spring事务支持 -->
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-spring-txn</artifactId>
+            <version>${ebean.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-externalmapping-api</artifactId>
+            <version>14.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-jackson-mapper</artifactId>
+            <version>${ebean.version}</version>
+        </dependency>
+        <!-- 数据源全平台支持 -->
+<!--        <dependency>-->
+<!--            <groupId>io.ebean</groupId>-->
+<!--            <artifactId>ebean-platform-all</artifactId>-->
+<!--            <version>${ebean.version}</version>-->
+<!--        </dependency>-->
+        <!-- 数据源Postgres平台支持 -->
         <dependency>
             <groupId>io.ebean</groupId>
             <artifactId>ebean-platform-postgres</artifactId>
             <version>${ebean.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.ebean/ebean-ddl-generator -->
+
+
+
         <dependency>
             <groupId>io.ebean</groupId>
             <artifactId>ebean-ddl-generator</artifactId>
@@ -105,63 +153,35 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>io.ebean</groupId>
-            <artifactId>querybean-generator</artifactId>
-            <version>${ebean.version}</version>
-            <scope>provided</scope>
-        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
             <version>4.0.0-M1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.data</groupId>-->
-<!--            <artifactId>spring-data-jpa</artifactId>-->
-<!--            <version>4.0.0-M1</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.data</groupId>-->
-<!--            <artifactId>spring-data-jdbc</artifactId>-->
-<!--            <version>4.0.0-M1</version>-->
-<!--        </dependency>-->
-
-
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--            <optional>true</optional>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>junit</groupId>-->
-<!--            <artifactId>junit</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.github.hexagonframework.data</groupId>
             <artifactId>spring-data-ebean</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-api</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-core</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-slf4j-impl</artifactId>-->
+<!--            <version>${log4j.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -171,15 +191,15 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-         </dependency>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-         </dependency>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-         </dependency>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -193,16 +213,7 @@
             <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+
 
 
         <dependency>
@@ -235,7 +246,7 @@
                         <phase>process-classes</phase>
                         <configuration>
                             <!-- 调试模式仅在开发环境中启用 -->
-<!--                            <transformArgs>debug=1</transformArgs>-->
+                            <!--                            <transformArgs>debug=1</transformArgs>-->
                         </configuration>
                         <goals>
                             <goal>enhance</goal>
