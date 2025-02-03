@@ -1,0 +1,34 @@
+sky:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database0: 0
+    database1: 1
+    database2: 2
+    database3: 3
+    database4: 4
+    database5: 5
+    database6: 6
+    database7: 7
+    database8: 8
+    database9: 9
+    #连接超时时间（毫秒）
+    timeout: 3000
+    # 连接池最大连接数（使用负值表示没有限制）
+    pool:
+      maxActive: 100
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      maxWait: -1
+      # 连接池中的最大空闲连接
+      maxIdle: 8
+      # 连接池中的最小空闲连接
+      minIdle: 0
+  # 过滤器 放开拦截路径
+  filter:
+    openUri:
+      - /login
+      - /register
+      - /captchaImage
+      - /auth/**
+
