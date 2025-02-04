@@ -1,4 +1,4 @@
-package com.pzen.server.config.filter;
+package com.pzen.server.filter;
 
 import com.pzen.entity.User;
 import com.pzen.server.config.SkyConfigInfo;

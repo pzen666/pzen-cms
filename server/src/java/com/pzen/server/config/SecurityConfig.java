@@ -1,6 +1,6 @@
 package com.pzen.server.config;
 
-import com.pzen.server.config.filter.JwtTokenFilter;
+import com.pzen.server.filter.JwtTokenFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
