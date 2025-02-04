@@ -1,4 +1,4 @@
-package com.pzen.server.utils;
+package com.pzen.server.utils.generator;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -8,7 +8,7 @@ import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-public class KeyGenerator {
+public class JWTKeyGenerator {
 
     public static void main(String[] args) throws Exception {
 //        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");

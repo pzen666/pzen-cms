@@ -1,4 +1,8 @@
 sky:
+  smCrypt:
+    publicKey: 04c7afd2cdad7a7e3d86c83fd689ef81c9e8941c2da1e410899dfa548fec6cbedbac9280785817de7ffb74dda3dad3232a8999d358e4301780063482ec182bc47a
+    privateKey: d66a2b1f0c73376bc6ede79d0b64378d58c356fbf85800e9cbcd877510dc8cf8
+
   redis:
     host: 127.0.0.1
     port: 6379
@@ -27,10 +31,14 @@ sky:
   # 过滤器 放开拦截路径
   filter:
     openUri:
-      - /login
+#      - /login
       - /register
       - /captchaImage
       - /auth/**
       - /user/findOne
       - /redis/**
+      - /encrypt/**
+      - /encrypt/user
+
+
 

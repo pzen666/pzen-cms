@@ -9,6 +9,8 @@ spring:
       date-time: yyyy-MM-dd HH:mm:ss.SSS
       date: yyyy-MM-dd
       time: HH:mm:ss
+  aop:
+    auto: true
   profiles:
 #    active: prod #生产环境 运行全部任务
     active: dev #开发环境  不进行定时任务操作

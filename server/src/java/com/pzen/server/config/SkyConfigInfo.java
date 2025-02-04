@@ -16,6 +16,7 @@ public class SkyConfigInfo {
 
     private Filter filter;
     private Redis redis;
+    private SmCrypt smCrypt;
 
     public static class Filter {
         private List<String> openUri;
@@ -206,6 +207,27 @@ public class SkyConfigInfo {
             }
         }
     }
+
+    public static class SmCrypt{
+        private String publicKey;
+        private String privateKey;
+
+        public String getPublicKey() {
+            return publicKey;
+        }
+
+        public void setPublicKey(String publicKey) {
+            this.publicKey = publicKey;
+        }
+
+        public String getPrivateKey() {
+            return privateKey;
+        }
+
+        public void setPrivateKey(String privateKey) {
+            this.privateKey = privateKey;
+        }
+    }
     public Filter getFilter() {
         return filter;
     }
@@ -220,5 +242,13 @@ public class SkyConfigInfo {
 
     public void setRedis(Redis redis) {
         this.redis = redis;
+    }
+
+    public SmCrypt getSmCrypt() {
+        return smCrypt;
+    }
+
+    public void setSmCrypt(SmCrypt smCrypt) {
+        this.smCrypt = smCrypt;
     }
 }
