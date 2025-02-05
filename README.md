@@ -14,6 +14,20 @@ https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans
 * XXS SQL注入拦截器
 
 
+#### Github 解除ssl验证
+```
+fatal: unable to access 'https://github.com/xxxxx.git/': OpenSSL SSL_read: Connection was reset, errno 10054；
+git config --global http.sslVerify false
+git config --global https.sslVerify false
+
+fatal: unable to access 'https://github.com/xxxxx.git/': Failed to connect to github.com port 443 after 21126 ms: Timed out；
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+
+
+```
+
+
 
 
 
