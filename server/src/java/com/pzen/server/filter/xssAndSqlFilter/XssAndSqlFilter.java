@@ -18,14 +18,13 @@ import java.util.Map;
 /**
  * @author pzen
  */
-
 public class XssAndSqlFilter implements Filter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(XssAndSqlFilter.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(XssAndSqlFilter.class);
 
     @Override
     public void destroy() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -87,7 +86,7 @@ public class XssAndSqlFilter implements Filter {
             }
             br.close();
         } catch (IOException e) {
-            LOGGER.error("IOException: {0}", e);
+            logger.error("IOException: {0}", e);
         }
         return str.toString();
     }

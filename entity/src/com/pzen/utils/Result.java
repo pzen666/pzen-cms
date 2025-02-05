@@ -1,7 +1,5 @@
 package com.pzen.utils;
 
-import java.util.Map;
-
 public class Result<T> {
 
     private int code;
@@ -20,6 +18,7 @@ public class Result<T> {
     public static final int BAD_GATEWAY = 502; // 网关错误
     public static final int SERVICE_UNAVAILABLE = 503; // 服务不可用
     public static final int GATEWAY_TIMEOUT = 504; // 网关超时
+    public static final int XXS_SQL_ERROR = 748; // 网关超时
 
 
     // 构造函数
@@ -47,8 +46,12 @@ public class Result<T> {
         return new Result<>(code, "fail", null);
     }
 
-    public static Result<Map<String, String>> error(String msg) {
+    public static <T> Result<T> error(String msg) {
         return new Result<>(BAD_REQUEST, msg, null);
+    }
+
+    public static <T> Result<T> error748() {
+        return new Result<>(XXS_SQL_ERROR, "当前请求中有违反安全规则元素存在，拒绝访问!", null);
     }
 
     public int getCode() {

@@ -4,6 +4,7 @@ import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.SM2;
 import cn.hutool.json.JSONObject;
 import com.pzen.server.config.SkyConfigInfo;
+import com.pzen.utils.JsonUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -50,13 +51,19 @@ public class DecryptRequestAspect {
             } else if (hasRequestBody && args[i] instanceof JSONObject) {
                 // 如果是JsonNode类型的请求体，递归解密
                 JSONObject jo = (JSONObject) args[i];
-                String data = jo.getStr("data","");
+                String data = jo.getStr("data", "");
                 String decryptedData = decrypt(data);
-                // 将解密后的字符串转换回 JSONObject
                 JSONObject decryptedJo = new JSONObject();
-                decryptedJo.set("data", decryptedData);
+                try {
+                    decryptedJo = JsonUtils.fromJson(decryptedData, JSONObject.class);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                // 将解密后的字符串转换回 JSONObject
+//                JSONObject decryptedJo = new JSONObject();
+//                decryptedJo.set("data", decryptedData);
                 args[i] = decryptedJo;
-                logger.info("Decrypted JSON Node parameter {}: {}", i,  data, decryptedData);
+                logger.info("Decrypted JSON Node parameter {}: {} {}", i, data, decryptedData);
             }
         }
         // 执行目标方法并返回结果
@@ -77,7 +84,6 @@ public class DecryptRequestAspect {
             throw new RuntimeException("Decryption failed", e);
         }
     }
-
 
 
 }
