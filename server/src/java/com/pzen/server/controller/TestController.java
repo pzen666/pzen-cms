@@ -38,7 +38,8 @@ public class TestController {
     //    "name" : {"type": "equals","value": null}
     //  }
     //}
-    @GetMapping("/find")
+//    @GetMapping("/find")
+    @PostMapping("/find")
     public Result<Page<Test>> find(@RequestBody TestDTO dto) {
         Query<Test> query = DB.find(Test.class);
         // 使用工具类构建查询条件

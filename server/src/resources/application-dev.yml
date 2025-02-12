@@ -39,6 +39,8 @@ sky:
       - /redis/**
       - /encrypt/**
       - /encrypt/user
+      - /test/find
+
 
 
 
