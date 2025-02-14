@@ -2,6 +2,7 @@ package com.pzen.server.service;
 
 import com.pzen.dto.UserDTO;
 import com.pzen.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface UserService {
 
@@ -13,4 +14,5 @@ public interface UserService {
 
     User findOne(UserDTO dto);
 
+    User getUserInfo(HttpServletRequest request);
 }

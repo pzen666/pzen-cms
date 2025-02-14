@@ -4,6 +4,7 @@ import com.pzen.dto.UserDTO;
 import com.pzen.entity.User;
 import com.pzen.server.service.UserService;
 import com.pzen.utils.Result;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
@@ -49,9 +50,10 @@ public class UserController {
         return Result.success(u, null);
     }
 
-    @GetMapping("/get")
-    public Result<Object> get() {
-        return Result.success("123456789", null);
+    @GetMapping("/getUserInfo")
+    public Result<Object> getUserInfo(HttpServletRequest request) {
+        User u = userService.getUserInfo(request);
+        return Result.success(u);
     }
 
 }

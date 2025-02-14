@@ -49,12 +49,12 @@ public class AuthController {
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(HttpServletRequest request) {
-        String refreshToken = jwtUtil.resolveToken(request);
-        if (refreshToken == null) {
+        String token = jwtUtil.resolveToken(request);
+        if (token == null) {
             return ResponseEntity.badRequest().body("Refresh token is missing");
         }
         try {
-            String newAccessToken = jwtUtil.refreshToken(refreshToken);
+            String newAccessToken = jwtUtil.refreshToken(token);
             return ResponseEntity.ok().body("Bearer " + newAccessToken);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
