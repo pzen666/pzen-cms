@@ -289,6 +289,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.pzen.server.PZenCmsApplication</mainClass>
+                </configuration>
             </plugin>
 
             <plugin> <!-- perform ebean enhancement -->

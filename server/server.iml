@@ -6,7 +6,4 @@
       <sourceFolder url="file://$MODULE_DIR$/src/resources" type="java-resource" />
     </content>
   </component>
-  <component name="CheckStyle-IDEA-Module" serialisationVersion="2">
-    <option name="activeLocationsIds" />
-  </component>
 </module>
