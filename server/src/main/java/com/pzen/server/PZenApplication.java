@@ -7,10 +7,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 @EnableAspectJAutoProxy
 //@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
-public class PZenCmsApplication {
+public class PZenApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PZenCmsApplication.class, args);
+        SpringApplication.run(PZenApplication.class, args);
     }
 
 }

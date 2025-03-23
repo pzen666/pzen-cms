@@ -1,13 +1,13 @@
 package com.pzen.server.utils;
 
 import com.pzen.entity.User;
+import com.pzen.server.config.properties.JwtProperties;
 import io.ebean.DB;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
@@ -26,21 +26,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-
-    @Value("${jwt.secret.jwtType}")
-    private String jwtType;
-    @Value("${jwt.secret.expirationTime}")
-    private long expirationTime;
-    @Value("${jwt.secret.expirationRefreshTime}")
-    private long expirationRefreshTime;
-
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtProperties jwtProperties;
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
     public JwtUtil() throws Exception {
-        this.jwtType = jwtType;
         this.privateKey = loadPrivateKey(System.getProperty("user.dir") + "/path/key/private.key");
         this.publicKey = loadPublicKey(System.getProperty("user.dir") + "/path/key/public.key");
     }
@@ -99,7 +90,7 @@ public class JwtUtil {
     private String createToken(Map<String, Object> claims, String subject, PrivateKey privateKey) {
         return Jwts.builder().claims(claims).subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expirationTime))
+                .expiration(new Date(System.currentTimeMillis() + jwtProperties.expirationTime))
                 .signWith(SignatureAlgorithm.ES256, privateKey)
                 .compact();
     }

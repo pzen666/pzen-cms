@@ -1,3 +1,5 @@
+# springboot-ebean-jdk21  DEMO
+
 ### 说明
 #### License
 ```
@@ -12,6 +14,8 @@ https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans
 * JWT
 * 接口加密注解
 * XXS SQL注入拦截器
+* Modbus从站代码-长连接版，模拟WebSocket形式
+* Modbus主站代码-长连接版，模拟WebSocket形式
 
 
 #### Github 解除ssl验证
@@ -26,6 +30,7 @@ git config --global --unset https.proxy
 
 
 ```
+
 
 
 

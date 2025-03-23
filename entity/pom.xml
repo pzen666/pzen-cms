@@ -11,12 +11,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.pzen</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.ebean</groupId>
             <artifactId>jakarta-persistence-api</artifactId>
             <version>3.0</version>

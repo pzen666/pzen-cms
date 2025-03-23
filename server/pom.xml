@@ -276,10 +276,16 @@
             <artifactId>fastjson2</artifactId>
             <version>${fastjson2.version}</version>
         </dependency>
-
-
-
-
+        <dependency>
+            <groupId>com.fazecast</groupId>
+            <artifactId>jSerialComm</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
 
 
     </dependencies>
@@ -289,9 +295,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.pzen.server.PZenCmsApplication</mainClass>
-                </configuration>
             </plugin>
 
             <plugin> <!-- perform ebean enhancement -->
@@ -304,7 +307,7 @@
                         <phase>process-classes</phase>
                         <configuration>
                             <!-- 调试模式仅在开发环境中启用 -->
-                            <!--                            <transformArgs>debug=1</transformArgs>-->
+<!--                            <transformArgs>debug=1</transformArgs>-->
                         </configuration>
                         <goals>
                             <goal>enhance</goal>

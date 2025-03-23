@@ -1,0 +1,28 @@
+[
+  {
+    "name": "org.springframework.boot.SpringApplication",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "io.ebean.config.ServerConfig",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "org.springframework.context.annotation.ConfigurationClassPostProcessor",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "org.springframework.core.ResolvableType",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "org.springframework.beans.factory.support.DefaultListableBeanFactory",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  }
+
+]

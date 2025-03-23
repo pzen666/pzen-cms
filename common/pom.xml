@@ -8,6 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>common</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -36,4 +37,5 @@
             <version>0.12.5</version>
         </dependency>
     </dependencies>
+
 </project>

@@ -1,0 +1,18 @@
+[
+  {
+    "pattern": "application.yml"
+  },{
+    "pattern": "application-dev.yml"
+  },{
+    "pattern": "application-prod.yml"
+  },
+  {
+    "pattern": "logback.xml"
+  },
+  {
+    "pattern": "ebean.mf"
+  },
+  {
+    "pattern": "ebean.properties"
+  }
+]

@@ -49,7 +49,7 @@ logging:
 
 jwt:
   secret:
-    jwtType: EC # RSA EC  记得修改 JwtUtil.java 102行
+    jwtType: EC # RSA EC  记得修改 JwtUtil.java 103行
     expirationTime: 86400000
     expirationRefreshTime: 86400000
 
