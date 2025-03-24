@@ -1,4 +1,3 @@
-entity-packages: com.pzen.entity
-transactional-packages: com.pzen.server.service.impl
-
+entity-packages: com.pzen.entity,com.pzen.webAdmin.entity,com.pzen.webUser.entity
+transactional-packages: com.pzen.server
 

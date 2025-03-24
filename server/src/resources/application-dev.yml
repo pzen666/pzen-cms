@@ -40,5 +40,6 @@ sky:
       - /encrypt/**
       - /encrypt/user
       - /test/find
+      - /**
 
 
